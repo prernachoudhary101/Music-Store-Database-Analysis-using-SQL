@@ -1,0 +1,8 @@
+Dataset: HR Analytics Employee Attrition Dataset
+
+Source: Publicly available dataset (original source not specified)
+
+Notes:
+- This dataset is commonly used for HR analytics and attrition analysis practice.
+- Columns include employee demographics, job role, salary, experience, and attrition status.
+- Used strictly for educational and portfolio purposes.
