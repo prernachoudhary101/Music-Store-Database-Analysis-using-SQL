@@ -1,3 +1,72 @@
+-- total revenue
+
+SELECT 
+    ROUND(SUM(total), 2) AS total_revenue
+FROM invoice;
+
+-- total revenue by genre
+
+SELECT 
+    g.name AS genre,
+    ROUND(SUM(il.unit_price * il.quantity), 2) AS revenue
+FROM invoice_line il
+JOIN track t ON il.track_id = t.track_id
+JOIN genre g ON t.genre_id = g.genre_id
+GROUP BY g.name
+ORDER BY revenue DESC;
+
+-- revenue by artist
+
+SELECT 
+    ar.name AS artist,
+    ROUND(SUM(il.unit_price * il.quantity), 2) AS revenue
+FROM invoice_line il
+JOIN track t ON il.track_id = t.track_id
+JOIN album al ON t.album_id = al.album_id
+JOIN artist ar ON al.artist_id = ar.artist_id
+GROUP BY ar.name
+ORDER BY revenue DESC;
+
+-- sales by country
+
+SELECT 
+    billing_country AS country,
+    ROUND(SUM(total), 2) AS revenue
+FROM invoice
+GROUP BY billing_country
+ORDER BY revenue DESC;
+
+-- top 10 Customers by Lifetime Spend
+SELECT 
+    c.customer_id,
+    CONCAT(c.first_name, ' ', c.last_name) AS customer_name,
+    ROUND(SUM(i.total), 2) AS lifetime_spend
+FROM customer c
+JOIN invoice i ON c.customer_id = i.customer_id
+GROUP BY c.customer_id, customer_name
+ORDER BY lifetime_spend DESC
+LIMIT 10;
+
+-- Monthly Revenue Trend
+
+SELECT 
+    DATE_FORMAT(invoice_date, '%Y-%m') AS month,
+    ROUND(SUM(total), 2) AS monthly_revenue
+FROM invoice
+GROUP BY month
+ORDER BY month;
+
+-- Average Order Value per Customer
+
+SELECT 
+    c.customer_id,
+    CONCAT(c.first_name, ' ', c.last_name) AS customer_name,
+    ROUND(AVG(i.total), 2) AS avg_order_value
+FROM customer c
+JOIN invoice i ON c.customer_id = i.customer_id
+GROUP BY c.customer_id, customer_name
+ORDER BY avg_order_value DESC;
+
 /* Q1: Who is the senior most employee based on job title? */
 
 SELECT title, last_name, first_name 
