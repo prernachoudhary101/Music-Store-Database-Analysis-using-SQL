@@ -19,7 +19,7 @@ Retail music stores need insights into customer behavior and product performance
 - Certain regions outperform others in total sales
 - Revenue shows consistent trends across months
 
-##  Example SQL Queries
+###  Example SQL Queries
 ```sql
 -- Top 10 Customers by Total Spend
 SELECT customer_id,
@@ -36,7 +36,6 @@ FROM invoice_items il
 JOIN tracks t ON il.track_id = t.track_id
 JOIN genres g ON t.genre_id = g.genre_id
 GROUP BY g.genre_name;
-📊 Visualizations
 
 ### Use Case
 This analysis can support sales and marketing teams by:
