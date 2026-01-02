@@ -20,7 +20,7 @@ Retail music stores need insights into customer behavior and product performance
 - Revenue shows consistent trends across months
 
 ###  Example SQL Queries
-```sql
+
 -- Top 10 Customers by Total Spend
 SELECT customer_id,
        SUM(total_amount) AS total_spent
